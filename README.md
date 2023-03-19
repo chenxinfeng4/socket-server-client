@@ -22,6 +22,7 @@ $ ./socket_client
 ### C++ windows QT
 After built on QT5
 ```
+> socket_server_client/qt_cpp/socket_server/socket_server.exe
 > socket_server_client/qt_cpp/socket_client/socket_client.exe
 ```
 
