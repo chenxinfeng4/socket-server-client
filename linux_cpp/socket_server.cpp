@@ -11,6 +11,12 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
+#if __APPLE__
+#define MY_SOOPT SO_REUSEADDR
+#elif __linux__
+#define MY_SOOPT SO_REUSEADDR | SO_REUSEPORT
+#endif
+
 #define PORT 20169
 int main(int argc, char const* argv[])
 {
@@ -29,7 +35,7 @@ int main(int argc, char const* argv[])
   
     // Forcefully attaching socket to the port 8080
     if (setsockopt(server_fd, SOL_SOCKET,
-                   SO_REUSEADDR | SO_REUSEPORT, &opt,
+                   MY_SOOPT, &opt,
                    sizeof(opt))) {
         perror("setsockopt");
         exit(EXIT_FAILURE);
