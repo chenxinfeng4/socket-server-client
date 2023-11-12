@@ -18,17 +18,17 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
 
         print("conn is :",self.request) # conn
         print("addr is :",self.client_address) # addr
- 
-        while True:
-            try:
+
+        try:
+            while True:
                 #收消息
                 data = self.request.recv(1024)
                 if not data:break
                 print("收到客户端的消息是",data.decode("utf-8"))
                 #发消息
                 self.request.sendall(data.upper())
-            except Exception as e:
-                print(e)
+        except Exception as e:
+            print(e)
 
         print('Closed a request')
 
